@@ -119,7 +119,7 @@ Colores de error:
 
 VITE_LANGUAGETOOL_URL=https://api.languagetool.org/v2/check
 VITE_OLLAMA_URL=http://54.146.142.76:11434
-VITE_OLLAMA_MODEL=llama3.2
+VITE_OLLAMA_MODEL=qwen2.5:7b
 
 ## Referencias Útiles
 
@@ -137,4 +137,4 @@ Para producción usar self-hosted con Docker.
 Transformers.js descarga el modelo en la primera visita (~80-300MB).
 Usar IndexedDB para cachear.
 
-Ollama se detecta con fetch a localhost:11434/api/tags con timeout de 1 segundo.
+Ollama se detecta con fetch a http://54.146.142.76:11434/api/tags con timeout de 1 segundo.

@@ -185,3 +185,13 @@
   flex-direction: column;
   gap: 0.6rem;
 }
+
+.sidepanel__style-selector .label {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.sidepanel__style-selector .select {
+  width: auto;
+  min-width: 120px;
+}

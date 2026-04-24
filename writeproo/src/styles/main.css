@@ -2,16 +2,40 @@
 @import './tooltip.css';
 @import './sidepanel.css';
 @import './statusbar.css';
+@import './toast.css';
+@import './components.css';
 
 :root {
   --color-error-spelling: #ef4444;
   --color-error-grammar: #eab308;
   --color-error-style: #3b82f6;
+
   --background: oklch(0.99 0 0);
-  --foreground: oklch(0.2 0.02 280);
+  --foreground: oklch(0.15 0.02 280);
   --card: oklch(1 0 0);
-  --border: oklch(0.9 0.01 280);
+  --card-foreground: oklch(0.15 0.02 280);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 280);
+  --primary: oklch(0.55 0.2 250);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.96 0.01 280);
+  --secondary-foreground: oklch(0.2 0.02 280);
+  --muted: oklch(0.96 0.01 280);
+  --muted-foreground: oklch(0.55 0.01 280);
+  --accent: oklch(0.96 0.01 280);
+  --accent-foreground: oklch(0.2 0.02 280);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.92 0.01 280);
+  --input: oklch(0.92 0.01 280);
+  --ring: oklch(0.55 0.2 250);
   --radius: 0.5rem;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
   font-family:
     system-ui,
     'Segoe UI',
@@ -20,12 +44,19 @@
   line-height: 1.5;
   color: var(--foreground);
   background: var(--background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--border);
 }
 
 body {
@@ -40,22 +71,40 @@ body {
 }
 
 .app-header {
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--border);
   background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.app-header__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .app-title {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
 }
 
 .app-tagline {
-  margin: 0.25rem 0 0;
-  font-size: 0.875rem;
-  color: color-mix(in oklch, var(--foreground) 65%, transparent);
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
 }
 
 .app-shell {
@@ -77,10 +126,39 @@ body {
   min-width: 0;
   padding: 1rem;
   background: var(--background);
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
   .editor-host {
     max-width: none;
+    flex: 0 0 55%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidepanel-host {
+    flex: 1;
+    max-height: 45vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.625rem 1rem;
+  }
+  .app-title {
+    font-size: 1rem;
+  }
+  .app-tagline {
+    font-size: 0.75rem;
+  }
+  .editor-host {
+    flex: 0 0 50%;
+  }
+  .sidepanel-host {
+    max-height: 50vh;
   }
 }

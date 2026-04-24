@@ -3,6 +3,22 @@ import { EditorView, highlightActiveLine, highlightActiveLineGutter, lineNumbers
 import { minimalSetup } from 'codemirror'
 import { languageToolDecorations } from './markers.js'
 
+const STORAGE_KEY = 'writepro-doc'
+
+export function loadSavedDoc() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw && typeof raw === 'string' && raw.trim().length > 0) return raw.trim()
+  } catch { /* empty */ }
+  return null
+}
+
+export function saveDoc(text) {
+  try {
+    localStorage.setItem(STORAGE_KEY, text)
+  } catch { /* quota exceeded or private mode */ }
+}
+
 const defaultDoc =
   'Escribe aquí tu texto en español o inglés.\n\nWritePro — corrector en desarrollo.'
 
@@ -64,7 +80,8 @@ export function createEditor(parent, options = {}) {
     return { ok: false, error: 'contenedor del editor no encontrado' }
   }
 
-  const doc = options.doc ?? defaultDoc
+  const saved = loadSavedDoc()
+  const doc = options.doc ?? saved ?? defaultDoc
 
   const state = EditorState.create({
     doc,
@@ -76,6 +93,9 @@ export function createEditor(parent, options = {}) {
       editorTheme(),
       ...languageToolDecorations(),
       ...(options.extensions ?? []),
+      EditorView.updateListener.of((update) => {
+        if (update.docChanged) saveDoc(update.state.doc.toString())
+      }),
     ],
   })
 
