@@ -1,9 +1,0 @@
-{
-  "name": "write-pro",
-  "private": true,
-  "scripts": {
-    "dev": "npm run dev --prefix writeproo",
-    "build": "npm run build --prefix writeproo",
-    "preview": "npm run preview --prefix writeproo"
-  }
-}
