@@ -6,7 +6,7 @@ Instrucción para la IA: Lee este archivo completo antes de responder cualquier 
 
 - Nombre: WritePro
 - Qué hace: Corrector de escritura web (similar a Grammarly) que detecta errores de ortografía, gramática, puntuación y estilo en español e inglés, con indicador de tono y reescritura de frases. 100% open source, sin APIs de pago ni modelos propietarios.
-- Estado actual: Proyecto nuevo — configuración inicial pendiente
+- Estado actual: **Completo** — los 9 pasos del CONTEXT están implementados
 - Contexto: Proyecto independiente. No tiene relación con App_Rewrite (redactor corporativo con Gemini), que permanece en su propio repo.
 
 ## Stack Tecnológico
@@ -17,7 +17,7 @@ Instrucción para la IA: Lee este archivo completo antes de responder cualquier 
 - Estilo visual: Inspirado en shadcn/ui — cards, tokens CSS, estados loading/error/success bien definidos
 - Editor de texto: CodeMirror 6 (subrayado inline de errores)
 - Motor gramática: LanguageTool
-  - Dev: API pública <https://api.languagetool.org/v2/check>
+  - Dev: API pública https://api.languagetool.org/v2/check
   - Prod: self-hosted docker run -p 8010:8010 silviof/docker-languagetool
 - Detección idioma: franc-min (detecta ES/EN automáticamente)
 - Tono básico: wink-sentiment (instantáneo, sin red)
@@ -44,14 +44,16 @@ writeproo/
     │   ├── languagetool.js
     │   ├── sentiment.js
     │   ├── rewrite.js
-    │   └── langdetect.js
+    │   ├── langdetect.js
+    │   └── ltIgnoredRules.js
     ├── ui/
     │   ├── tooltip.js
     │   ├── sidepanel.js
     │   └── statusbar.js
     ├── core/
     │   ├── orchestrator.js
-    │   └── diff.js
+    │   ├── diff.js
+    │   └── languageToolBridge.js
     └── styles/
         ├── main.css
         ├── editor.css
@@ -61,62 +63,33 @@ writeproo/
 
 ## Lo que ya está hecho
 
-Nada aún — proyecto en configuración inicial
+Todos los 9 pasos implementados:
+
+| Paso | Descripción | Estado |
+|------|-------------|--------|
+| 1 | Setup Vite vanilla + dependencias + estructura + .env/.gitignore | ✅ Completo |
+| 2 | Editor base CodeMirror 6 (texto plano, 60% layout responsive) | ✅ Completo |
+| 3 | LanguageTool API + debounce 800ms + markers (spelling/grammar/style) | ✅ Completo |
+| 4 | Tooltip sugerencias + diff-match-patch + botones Aceptar/Ignorar/Ignorar siempre | ✅ Completo |
+| 5 | Detección idioma (franc-min) → LanguageTool | ✅ Completo |
+| 6 | Tono básico (wink-sentiment) + sidepanel | ✅ Completo |
+| 7 | Transformers.js carga lazy + tono avanzado + reescritura básica | ✅ Completo |
+| 8 | Ollama opcional (detección + reescritura) | ✅ Completo |
+| 9 | Status bar con 4 indicadores de motores | ✅ Completo |
 
 ## Trabajo de la Última Sesión
 
-Proyecto creado. Aún no se ha escrito código.
+Implementación completa del proyecto WritePro según los 9 pasos del CONTEXT:
+- Editor CodeMirror 6 con subrayados inline por categoría
+- LanguageTool con debounce y persistencia de reglas ignoradas
+- Detección automática de idioma ES/EN
+- Panel lateral con tono (básico + avanzado con Transformers)
+- Reescritura con Transformers.js (Flan-T5) y Ollama opcional
+- Status bar con estado de todos los motores
 
 ## Próximos Pasos
 
-1 [ALTA] Setup inicial del proyecto
-
-- npm create vite@latest writeproo -- --template vanilla
-- Instalar dependencias base: codemirror, diff-match-patch, franc-min, wink-sentiment
-- Configurar .env y .gitignore
-
-2 [ALTA] Editor base con CodeMirror 6
-
-- src/editor/index.js: instanciar CM6 en el div #editor
-- Configurar idioma básico (texto plano por ahora)
-- Responsive: ocupa el 60% izquierdo del layout
-
-3 [ALTA] Servicio LanguageTool + subrayados inline
-
-- src/services/languagetool.js: POST con debounce 800ms
-- src/editor/markers.js: extensión CM6 que pinta errores
-- Colores: rojo=spelling, amarillo=grammar, azul=style
-
-4 [ALTA] Tooltip con sugerencias + aplicar cambio
-
-- src/ui/tooltip.js: aparece al hacer clic en error subrayado
-- src/core/diff.js: aplica sugerencia con diff-match-patch
-- Botones: Aceptar / Ignorar / Ignorar siempre
-
-5 [MEDIA] Detección automática de idioma
-
-- src/services/langdetect.js: franc-min sobre el texto actual
-- Se pasa como parámetro language a LanguageTool
-
-6 [MEDIA] Indicador de tono básico
-
-- src/services/sentiment.js: wink-sentiment en tiempo real
-- src/ui/sidepanel.js: muestra tono + score en panel lateral
-
-7 [MEDIA] Transformers.js (tono avanzado + reescritura básica)
-
-- Carga lazy al primer uso (no bloquea arranque)
-- Cachear modelo en IndexedDB para no re-descargar
-
-8 [BAJA] Soporte Ollama (reescritura avanzada)
-
-- src/services/capabilities.js: detecta <http://54.146.142.76:11434> con fetch + timeout 1s
-- Si disponible, habilitar botón "Reescribir con Ollama"
-
-9 [BAJA] Status bar de motores
-
-- src/ui/statusbar.js: indicadores por cada motor
-- Se actualiza al resultado de detectCapabilities()
+Todos completados — el proyecto está listo para usar.
 
 ## Problemas Conocidos
 
@@ -139,16 +112,17 @@ Colores de error:
 
 ## Variables de Entorno
 
-VITE_LANGUAGETOOL_URL=<https://api.languagetool.org/v2/check>
-VITE_OLLAMA_URL=<http://54.146.142.76:11434>
+VITE_LANGUAGETOOL_URL=https://api.languagetool.org/v2/check
+VITE_OLLAMA_URL=http://54.146.142.76:11434
+VITE_OLLAMA_MODEL=llama3.2
 
 ## Referencias Útiles
 
-LanguageTool API: <https://languagetool.org/http-api/>
-CodeMirror 6 docs: <https://codemirror.net/docs/>
-Transformers.js: <https://huggingface.co/docs/transformers.js>
-Ollama API: <https://github.com/ollama/ollama/blob/main/docs/api.md>
-shadcn/ui: <https://ui.shadcn.com/>
+LanguageTool API: https://languagetool.org/http-api/
+CodeMirror 6 docs: https://codemirror.net/docs/
+Transformers.js: https://huggingface.co/docs/transformers.js
+Ollama API: https://github.com/ollama/ollama/blob/main/docs/api.md
+shadcn/ui: https://ui.shadcn.com/
 
 ## Notas Adicionales
 
