@@ -1,0 +1,187 @@
+.sidepanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.sidepanel__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.sidepanel__hint {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: color-mix(in oklch, var(--foreground) 58%, transparent);
+}
+
+.sidepanel__tone-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.sidepanel__tone-card[data-tone='positive'] {
+  border-color: color-mix(in oklch, #22c55e 35%, var(--border));
+  background: color-mix(in oklch, #22c55e 8%, var(--card));
+}
+
+.sidepanel__tone-card[data-tone='negative'] {
+  border-color: color-mix(in oklch, #ef4444 35%, var(--border));
+  background: color-mix(in oklch, #ef4444 8%, var(--card));
+}
+
+.sidepanel__tone-card[data-tone='neutral'] {
+  border-color: color-mix(in oklch, var(--foreground) 12%, var(--border));
+}
+
+.sidepanel__tone-card[data-tone='unknown'] {
+  opacity: 0.85;
+}
+
+.sidepanel__tone-label {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.sidepanel__tone-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 1rem;
+  background: color-mix(in oklch, var(--foreground) 6%, transparent);
+}
+
+.sidepanel__stats {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.sidepanel__stat {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--background) 70%, var(--card));
+}
+
+.sidepanel__stat dt {
+  margin: 0 0 0.2rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklch, var(--foreground) 55%, transparent);
+}
+
+.sidepanel__stat dd {
+  margin: 0;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.sidepanel-tf {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sidepanel__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.sidepanel__btn:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--foreground) 5%, var(--card));
+}
+
+.sidepanel__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sidepanel__btn--secondary {
+  margin-top: 0.25rem;
+}
+
+.sidepanel-tf__status {
+  margin: 0;
+  font-size: 0.75rem;
+  color: color-mix(in oklch, var(--foreground) 70%, transparent);
+  word-break: break-word;
+}
+
+.sidepanel-tf__labels {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: color-mix(in oklch, var(--foreground) 88%, transparent);
+}
+
+.sidepanel-tf__labels li {
+  margin-bottom: 0.2rem;
+}
+
+.sidepanel-tf__out-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklch, var(--foreground) 55%, transparent);
+}
+
+.sidepanel-tf__out {
+  width: 100%;
+  resize: vertical;
+  min-height: 5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--background) 85%, var(--card));
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--foreground);
+}
+
+.sidepanel-ollama {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}

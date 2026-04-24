@@ -1,0 +1,86 @@
+@import './editor.css';
+@import './tooltip.css';
+@import './sidepanel.css';
+@import './statusbar.css';
+
+:root {
+  --color-error-spelling: #ef4444;
+  --color-error-grammar: #eab308;
+  --color-error-style: #3b82f6;
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.2 0.02 280);
+  --card: oklch(1 0 0);
+  --border: oklch(0.9 0.01 280);
+  --radius: 0.5rem;
+  font-family:
+    system-ui,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  line-height: 1.5;
+  color: var(--foreground);
+  background: var(--background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+}
+
+#app {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.app-tagline {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: color-mix(in oklch, var(--foreground) 65%, transparent);
+}
+
+.app-shell {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.editor-host {
+  flex: 1 1 60%;
+  max-width: 60%;
+  min-width: 0;
+  border-right: 1px solid var(--border);
+  background: var(--card);
+}
+
+.sidepanel-host {
+  flex: 1 1 40%;
+  min-width: 0;
+  padding: 1rem;
+  background: var(--background);
+}
+
+@media (max-width: 768px) {
+  .editor-host {
+    max-width: none;
+  }
+}

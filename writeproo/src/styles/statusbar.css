@@ -1,0 +1,89 @@
+.statusbar-root {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  background: color-mix(in oklch, var(--card) 92%, var(--background));
+}
+
+.statusbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.4rem 1rem;
+  max-width: 100%;
+}
+
+.statusbar__title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: color-mix(in oklch, var(--foreground) 52%, transparent);
+}
+
+.statusbar__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.statusbar__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: color-mix(in oklch, var(--foreground) 88%, transparent);
+}
+
+.statusbar__name {
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.statusbar__detail {
+  font-size: 0.6875rem;
+  color: color-mix(in oklch, var(--foreground) 58%, transparent);
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statusbar__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: color-mix(in oklch, var(--foreground) 35%, transparent);
+}
+
+.statusbar__pill[data-status='ok'] .statusbar__dot {
+  background: #22c55e;
+}
+
+.statusbar__pill[data-status='warn'] .statusbar__dot {
+  background: var(--color-error-grammar);
+}
+
+.statusbar__pill[data-status='off'] .statusbar__dot {
+  background: color-mix(in oklch, var(--foreground) 28%, transparent);
+}
+
+.statusbar__pill[data-status='off'] {
+  opacity: 0.92;
+}
+
+@media (max-width: 768px) {
+  .statusbar__detail {
+    max-width: 10rem;
+  }
+}

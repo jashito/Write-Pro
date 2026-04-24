@@ -1,0 +1,99 @@
+.lt-tooltip {
+  max-width: min(22rem, calc(100vw - 1.5rem));
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow:
+    0 4px 6px -1px color-mix(in oklch, var(--foreground) 8%, transparent),
+    0 2px 4px -2px color-mix(in oklch, var(--foreground) 6%, transparent);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.lt-tooltip__message {
+  margin: 0 0 0.6rem;
+  font-size: 0.8125rem;
+  color: color-mix(in oklch, var(--foreground) 88%, transparent);
+}
+
+.lt-tooltip__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+
+.lt-tooltip__empty {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: color-mix(in oklch, var(--foreground) 55%, transparent);
+}
+
+.lt-tooltip__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--background) 96%, transparent);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.lt-tooltip__chip:hover {
+  background: color-mix(in oklch, var(--foreground) 6%, var(--background));
+}
+
+.lt-tooltip__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.lt-tooltip__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--border);
+  background: var(--card);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.lt-tooltip__btn:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--foreground) 5%, var(--card));
+}
+
+.lt-tooltip__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.lt-tooltip__btn--primary {
+  border-color: color-mix(in oklch, var(--color-error-style) 45%, var(--border));
+  background: color-mix(in oklch, var(--color-error-style) 12%, var(--card));
+  font-weight: 500;
+}
+
+.lt-tooltip__btn--primary:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--color-error-style) 20%, var(--card));
+}
+
+.lt-tooltip__btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: color-mix(in oklch, var(--foreground) 65%, transparent);
+}
+
+.lt-tooltip__btn--ghost:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--foreground) 6%, transparent);
+}
